@@ -1,0 +1,41 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.egg-info/
+.eggs/
+.pytest_cache/
+.coverage
+htmlcov/
+
+# Virtual Environments
+.venv/
+venv/
+env/
+ENV/
+
+# Databases & Agent state
+*.db
+*.sqlite
+*.sqlite3
+
+# Logs and runtime artifacts
+*.log
+*.jsonl
+
+# Agent Workspace Jail
+# (ignores everything in the workspace directory)
+/workspace/
+
+# Environment variables
+.env
+.env.*
+
+# IDEs & OS
+.vscode/
+.idea/
+.DS_Store
+__MACOSX/
+
+# Documentation (Added by user)
+/docs/
