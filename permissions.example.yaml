@@ -1,0 +1,14 @@
+---
+allowed_roots:
+  - /home/user/project
+  - /tmp/sandbox
+
+denied_patterns:
+  - '*.env'
+  - '*.key'
+  - '**/secret/*'
+
+allowed_operations:
+  - read
+  - write
+  - delete
