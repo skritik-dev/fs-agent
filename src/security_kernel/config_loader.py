@@ -28,3 +28,7 @@ def load_config(config_path: str | Path) -> PermissionConfig:
         raw = yaml.safe_load(fh) or {}
 
     return PermissionConfig.model_validate(raw)
+
+#? INPUT: permissions.yaml
+#? PROCESSING: yaml_parser -> validate -> PermissionConfig object
+#? OUTPUT: PermissionConfig object
