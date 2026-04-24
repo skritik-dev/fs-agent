@@ -53,6 +53,18 @@ def in_allowed_root(real_path: Path, workspace_root: Path) -> bool:
     abs_root = workspace_root.resolve(strict=False)
     return abs_real.is_relative_to(abs_root)
 
+def is_agent_memory(virtual_path: str) -> bool:
+    """
+    Prevents the agent from accessing its own internal state directories.
+    Returns True if the path touches memory, False otherwise.
+    """ 
+    PROTECTED_DIRS = {".vault", ".snapshots", ".checkpoints"}
+    try:
+        rel_path = Path(virtual_path).relative_to("/workspace")
+        return len(rel_path.parts) > 0 and rel_path.parts[0] in PROTECTED_DIRS
+    except ValueError:
+        return False
+
 #? INPUT: virtual path or real path
 #? PROCESSING: check path safety / translate
 #? OUTPUT: boolean / virtual path or real path
