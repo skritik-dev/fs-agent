@@ -37,6 +37,22 @@ def resolve_real_to_virtual(real_path: Path, workspace_root: Path) -> str:
         return VIRTUAL_ROOT
     return f"{VIRTUAL_ROOT}/{virtual_rel}"
 
+def has_traversal(virtual_path: str) -> bool:
+    """
+    Checks if a virtual path contains directory traversal attempts (e.g., '..').
+    Returns True if traversal is detected, False otherwise.
+    """
+    return ".." in Path(virtual_path).parts
+
+def in_allowed_root(real_path: Path, workspace_root: Path) -> bool:
+    """
+    Verifies that a real OS path is strictly within the allowed workspace root.
+    Returns True if safe, False if it escapes the root.
+    """
+    abs_real = real_path.resolve(strict=False)
+    abs_root = workspace_root.resolve(strict=False)
+    return abs_real.is_relative_to(abs_root)
+
 #? INPUT: virtual path or real path
-#? PROCESSING: conversion from virtual to real path or vice versa
-#? OUTPUT: virtual path or real path
+#? PROCESSING: check path safety / translate
+#? OUTPUT: boolean / virtual path or real path
